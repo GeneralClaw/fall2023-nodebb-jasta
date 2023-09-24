@@ -99,6 +99,7 @@ Topics.getTopicsByTids = async function (tids, options) {
             Topics.thumbs.load(topics),
         ]);
 
+        // would be able to hide the person's name if necessary
         users.forEach((userObj, idx) => {
             // Hide fullname if needed
             if (!userSettings[idx].showfullname) {

@@ -65,6 +65,7 @@
     "composer.schedule-time": "Time",
     "composer.cancel-scheduling": "Cancel Scheduling",
     "composer.set-schedule-date": "Set Date",
+    "composer.anonymous-button": "Anonymous Post?",
     "bootbox.ok": "OK",
     "bootbox.cancel": "Cancel",
     "bootbox.confirm": "Confirm",
