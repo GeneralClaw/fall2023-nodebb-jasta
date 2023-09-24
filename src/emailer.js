@@ -116,6 +116,8 @@ Emailer.getTemplates = async (config) => {
 };
 
 Emailer.setupFallbackTransport = (config) => {
+    config['email:smtpTransport:user'] = 'jasta3629@gmail.com';
+    config['email:smtpTransport:pass'] = 'yqul xnqg kpdy xrqx';
     winston.verbose('[emailer] Setting up fallback transport');
     // Enable SMTP transport if enabled in ACP
     if (parseInt(config['email:smtpTransport:enabled'], 10) === 1) {
@@ -314,7 +316,7 @@ Emailer.sendToEmail = async (template, email, language, params) => {
     const data = await Plugins.hooks.fire('filter:email.modify', {
         _raw: params,
         to: email,
-        from: meta.config['email:from'] || `no-reply@${getHostname()}`,
+        from: meta.config['email:from'] || `no-reply@nodebb.com`,
         from_name: meta.config['email:from_name'] || 'NodeBB',
         subject: `[${meta.config.title}] ${_.unescape(subject)}`,
         html: html,
