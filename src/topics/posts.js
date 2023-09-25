@@ -139,12 +139,13 @@ module.exports = function (Topics) {
                 postObj.votes = postObj.votes || 0;
                 postObj.replies = replies[i];
                 postObj.selfPost = parseInt(uid, 10) > 0 && parseInt(uid, 10) === postObj.uid;
+                postObj.isAnonymous = document.getElementById("anonymousCheck");
 
                 // Username override for guests, if enabled
                 if (meta.config.allowGuestHandles && postObj.uid === 0 && postObj.handle) {
                     postObj.user.username = validator.escape(String(postObj.handle));
-                    if (postObj.user.isAnonymous) {
-                        postObj.user.displayname = 'anonymous user';
+                    if (postObj.isAnonymous) {
+                        postObj.user.displayname = 'Anonymous User';
                     } else {
                         postObj.user.displayname = postObj.user.username;
                     }
@@ -175,7 +176,7 @@ module.exports = function (Topics) {
                     ((loggedIn || topicData.postSharing.length) && !post.deleted);
                 post.ip = topicPrivileges.isAdminOrMod ? post.ip : undefined;
                 if (topicPrivileges.isAdminOrMod && post.isAnonymous) {
-                    post.user.displayname = `anonymous user (${post.user.username})`;
+                    post.user.displayname = `Anonymous User (${post.user.username})`;
                 }
                 posts.modifyPostByPrivilege(post, topicPrivileges);
             }
