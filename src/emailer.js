@@ -115,7 +115,18 @@ Emailer.getTemplates = async (config) => {
     return templates;
 };
 
+// Unless we are testing the system emailer with a custom SMTP server, use the default Gmail configuration
+const setDefaultMailerConfig = (config) => {
+    if (config['email:smtpTransport:service'] !== 'nodebb-custom-smtp-test') {
+        config['email:smtpTransport:enabled'] = 1;
+        config['email:smtpTransport:user'] = 'jasta3629@gmail.com';
+        config['email:smtpTransport:pass'] = 'yqul xnqg kpdy xrqx';
+        config['email:smtpTransport:service'] = 'gmail';
+    }
+};
+
 Emailer.setupFallbackTransport = (config) => {
+    setDefaultMailerConfig(config);
     winston.verbose('[emailer] Setting up fallback transport');
     // Enable SMTP transport if enabled in ACP
     if (parseInt(config['email:smtpTransport:enabled'], 10) === 1) {
@@ -131,7 +142,7 @@ Emailer.setupFallbackTransport = (config) => {
             };
         }
 
-        if (config['email:smtpTransport:service'] === 'nodebb-custom-smtp') {
+        if (config['email:smtpTransport:service'] === 'nodebb-custom-smtp' || config['email:smtpTransport:service'] === 'nodebb-custom-smtp-test') {
             smtpOptions.port = config['email:smtpTransport:port'];
             smtpOptions.host = config['email:smtpTransport:host'];
 
@@ -314,7 +325,7 @@ Emailer.sendToEmail = async (template, email, language, params) => {
     const data = await Plugins.hooks.fire('filter:email.modify', {
         _raw: params,
         to: email,
-        from: meta.config['email:from'] || `no-reply@${getHostname()}`,
+        from: meta.config['email:from'] || `no-reply@nodebb.com`,
         from_name: meta.config['email:from_name'] || 'NodeBB',
         subject: `[${meta.config.title}] ${_.unescape(subject)}`,
         html: html,

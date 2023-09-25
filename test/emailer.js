@@ -117,7 +117,7 @@ describe('emailer', () => {
             'email:smtpTransport:enabled': '1',
             'email:smtpTransport:user': username,
             'email:smtpTransport:pass': 'anything',
-            'email:smtpTransport:service': 'nodebb-custom-smtp',
+            'email:smtpTransport:service': 'nodebb-custom-smtp-test',
             'email:smtpTransport:port': 4000,
             'email:smtpTransport:host': 'localhost',
             'email:smtpTransport:security': 'NONE',

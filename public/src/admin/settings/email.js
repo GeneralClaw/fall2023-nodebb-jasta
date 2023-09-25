@@ -107,7 +107,7 @@ define('admin/settings/email', ['ace/ace', 'alerts', 'admin/settings'], function
 
     function handleSmtpServiceChange() {
         const isCustom = $('[id="email:smtpTransport:service"]').val() === 'nodebb-custom-smtp';
-        $('[id="email:smtpTransport:custom-service"]')[isCustom ? 'slideDown' : 'slideUp'](isCustom);
+        $('[id="email:smtpTransport:custom-service"]')[isCustom ? 'slideDown' : 'slideUp'](true);
 
         const enabledEl = document.getElementById('email:smtpTransport:enabled');
         if (enabledEl) {
