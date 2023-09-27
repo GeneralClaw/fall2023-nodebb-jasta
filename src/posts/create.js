@@ -35,7 +35,6 @@ module.exports = function (Posts) {
             tid: tid,
             content: content,
             timestamp: timestamp,
-            isAnonymous: document.getElementById("anonymousCheck")
         };
 
         if (data.toPid) {
