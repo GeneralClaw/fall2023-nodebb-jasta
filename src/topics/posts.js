@@ -4,6 +4,7 @@
 const _ = require('lodash');
 const validator = require('validator');
 const nconf = require('nconf');
+const { assert } = require('console');
 
 const db = require('../database');
 const user = require('../user');
@@ -104,6 +105,11 @@ module.exports = function (Topics) {
     }
 
     Topics.addPostData = async function (postData, uid) {
+        // postData: object
+        // uid : number
+        // returns: void
+        assert(typeof uid === 'number');
+        assert(typeof postData === 'object');
         if (!Array.isArray(postData) || !postData.length) {
             return [];
         }
