@@ -17,6 +17,7 @@ export type TopicObjectCoreProperties = {
   bookmark: number;
   unreplied: boolean;
   icons: string[];
+  isAnonymous : boolean;
 };
 
 export type TopicObjectOptionalProperties = {
@@ -36,6 +37,7 @@ interface Teaser {
   timestampISO: string;
   user: UserObjectSlim;
   index: number;
+  isAnonymous : boolean;
 }
 
 export type TopicObjectSlim = TopicSlimProperties & TopicSlimOptionalProperties;
@@ -67,6 +69,7 @@ export type TopicSlimProperties = {
   votes: string;
   teaserPid: number | string;
   thumbs: Thumb[];
+  isAnonymous : boolean;
 };
 
 export type Thumb = {

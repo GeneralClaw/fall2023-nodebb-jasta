@@ -61,7 +61,11 @@ module.exports = function (Posts) {
             if (postData.user.hasOwnProperty('fullname')) {
                 postData.user.fullname = postData.user.username;
             }
-            postData.user.displayname = postData.user.username;
+            if (postData.isAnonymous) {
+                postData.user.displayname = 'Anonymous User';
+            } else {
+                postData.user.displayname = postData.user.username;
+            }
         }
     };
 

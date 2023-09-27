@@ -143,7 +143,11 @@ module.exports = function (Topics) {
                 // Username override for guests, if enabled
                 if (meta.config.allowGuestHandles && postObj.uid === 0 && postObj.handle) {
                     postObj.user.username = validator.escape(String(postObj.handle));
-                    postObj.user.displayname = postObj.user.username;
+                    if (postObj.isAnonymous) {
+                        postObj.user.displayname = 'Anonymous User';
+                    } else {
+                        postObj.user.displayname = postObj.user.username;
+                    }
                 }
             }
         });
@@ -170,7 +174,9 @@ module.exports = function (Topics) {
                         (post.deleted && parseInt(post.deleterUid, 10) === parseInt(topicPrivileges.uid, 10)))) ||
                     ((loggedIn || topicData.postSharing.length) && !post.deleted);
                 post.ip = topicPrivileges.isAdminOrMod ? post.ip : undefined;
-
+                if (topicPrivileges.isAdminOrMod && post.isAnonymous) {
+                    post.user.displayname = `Anonymous User (${post.user.username})`;
+                }
                 posts.modifyPostByPrivilege(post, topicPrivileges);
             }
         });
