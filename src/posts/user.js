@@ -3,6 +3,7 @@
 const async = require('async');
 const validator = require('validator');
 const _ = require('lodash');
+const { assert } = require('console');
 
 const db = require('../database');
 const user = require('../user');
@@ -56,6 +57,11 @@ module.exports = function (Posts) {
     };
 
     Posts.overrideGuestHandle = function (postData, handle) {
+        // postData: object
+        // handle: object
+        // returns: void
+        assert(typeof postData === 'object');
+        assert(typeof handle === 'object');
         if (meta.config.allowGuestHandles && postData && postData.user && parseInt(postData.uid, 10) === 0 && handle) {
             postData.user.username = validator.escape(String(handle));
             if (postData.user.hasOwnProperty('fullname')) {
