@@ -11,6 +11,7 @@ const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
+const { assert } = require('console');
 
 const User = require('./user');
 const Plugins = require('./plugins');
@@ -115,8 +116,17 @@ Emailer.getTemplates = async (config) => {
     return templates;
 };
 
+/**
+ * Modifies the given configuration object to set default mailer configuration.
+ * If the current mailer service is not 'nodebb-custom-smtp-test'
+ * sets the mailer service to 'gmail' with predefined user credentials.
+ * @param {object} config - The configuration object to modify
+ * @returns {void} - Nothing
+ */
 // Unless we are testing the system emailer with a custom SMTP server, use the default Gmail configuration
 const setDefaultMailerConfig = (config) => {
+    // Assert typeof config === 'object'
+    assert(typeof config === 'object', 'config must be an object');
     if (config['email:smtpTransport:service'] !== 'nodebb-custom-smtp-test') {
         config['email:smtpTransport:enabled'] = 1;
         config['email:smtpTransport:user'] = 'jasta3629@gmail.com';
