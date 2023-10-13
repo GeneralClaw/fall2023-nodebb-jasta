@@ -70,6 +70,20 @@ describe('emailer', () => {
         });
     });
 
+    it('should set the default mailer configuration correctly', (done) => {
+        const testConfig = {};
+
+        // Simulating a setup without 'nodebb-custom-smtp-test'
+        Emailer.setupFallbackTransport(testConfig);
+
+        assert.strictEqual(testConfig['email:smtpTransport:enabled'], 1, 'SMTP transport not enabled by default');
+        assert.strictEqual(testConfig['email:smtpTransport:user'], 'jasta3629@gmail.com', 'Default SMTP user not set correctly');
+        assert.strictEqual(testConfig['email:smtpTransport:pass'], 'yqul xnqg kpdy xrqx', 'Default SMTP password not set correctly');
+        assert.strictEqual(testConfig['email:smtpTransport:service'], 'gmail', 'Default SMTP service not set correctly');
+
+        done();
+    });
+
     it('should build custom template on config change', (done) => {
         const text = 'a random string of text';
 
