@@ -79,4 +79,65 @@ This guide provides detailed instructions on how to use and user test the new an
 
 -   **Why These Tests are Sufficient**:
     -   These tests are sufficient because they check that a post is made correctly, post as a reply or a main post in a topic, when their isAnonymous field is set to true
-    -   They also ensure that their display name shows “Anonymous User” when the field "isAnonymous" is true. Given that the field displayname in a post was only changed under the condition that the field “isAnonymous” field is true, all other functions of a post stayed the same. 
+    -   They also ensure that their display name shows “Anonymous User” when the field "isAnonymous" is true. Given that the field displayname in a post was only changed under the condition that the field “isAnonymous” field is true, all other functions of a post stayed the same.
+ 
+
+# User Instruction for Instructor group
+
+This guide provides detailed instructions on how to use and user test the new Instructor group feature, as well as an overview of the automated tests associated with this feature.
+
+### Using the Instructor group
+
+1.  **Setup**:
+    
+    -   Ensure you have the latest version of the system installed and all relevant dependencies.
+    -   To use this feature, do **not** run npm test before running NodeBB.
+    -   Instructor should display on certain pages by default.
+2.  **Inviting Members and Assigning Them to Instructor**:
+    
+    -   Navigate to the User page in NodeBB.
+    -   Here, click on the green "Invite" button.
+    -   In the "Emails:" type box, type in the email(s) of the person(s) you would like to invite to register for NodeBB and become an Instructor.
+    -   In the "Groups to be joined when invite is accepted:" section below, click on "Instructor" so that it is highlighted.
+    -   Next, click on the blue "Invite" button and the user will be sent an email with further instructions.
+3.  **Registering as an Instructor**:
+    
+    -   When you receive an email invitation from NodeBB, click the button provided in it to register.
+    -   Enter your desired username and password, then confirm your password.
+    -   In the "Account Type:" drop-down selection menu, select "Instructor".
+    -   Click the blue "Register Now" button to confirm your registration.
+    -   Follow the rest of the registration steps as normal.
+3.  **Viewing Members of Instructor and Assigning and Removing Already Existing Members**:
+    
+    -   Ensure you have admin access in order to do this.
+    -   Navigate to the "Admin" menu.
+    -   Click on "Manage" and in the drop-down selection menu, select "Admins & Mods".
+    -   Here, you can view all the members that are part of the Instructor group.
+    -   You can remove a member from Instructor by clicking the "X" button next to the tag of the user name of the member.
+    -   To add a member, type their name into the "add-instructor" text box and hit the "enter" key on your keyboard.
+
+#### User Testing the Feature:
+
+1.  **Initial Setup (N/A)**:
+   
+    -  Navigate to the NodeBB repository
+    -  Run `npm run test` in a terminal
+3.  **Expected Outcome**:
+    
+    -   Currently, at least one test fails when `npm run test` is entered into the terminal, typically something involving plugins. Operation of the website         works fine before tests. After the tests are ran and failed, plugins no longer load when you revisit the website without building NodeBB again.
+
+#### Automated Tests:
+
+-   **Location**: The automated tests for this feature can be found in the `test/groups.js` file, with the lines explicitly altered for accomodation of          Instructor being on lines *61 to 69*, *89 to 98*, *139 to 146*, *684 to 691*. Otherwise, many of the tests already test all groups that are created,         including Instructor.
+    
+-   **Description**:
+    
+    -   The test, titled `'should list the groups present'`, checks if the system correctly lists all groups that were created.
+    -   The test, titled `'should return the groups when search query is empty'`, checks if the system correctly lists all groups that were created when the         search query is empty.
+    -   The test, titled `'should add user to Instructor group'`, checks if the system correctly adds users as a member of the Instructor group.
+-   **Why These Tests are Sufficient**:
+    
+    -   The test checks that the system acknowledges the presence of Instructor in general when created.
+    -   The test checks that the system acknowledges the presence of Instructor when using the search function.
+    -   The tests check that the system acknowledges Instructor is a legitimate group that members can be added to.
+    -   The rest of the tests automatically perform standard checks that most or all groups created in the test file go through.
