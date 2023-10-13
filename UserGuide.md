@@ -65,6 +65,8 @@ This guide provides detailed instructions on how to use and user test the new an
     -  Navigate to the NodeBB repository
     -  Run `npm run test` in a terminal
 
+2.  **Expected Outcome**:
+    -  Currently, the code does not pass the tests implemented. The display name for the post we create in the test is not changed automatically when we only run the function create the post, so the assert statement for checking the display name does not pass. However, the name of the post was displayed as "Anonymous User" when we manually tested it on the NodeBB website
 #### Automated Tests:
 
 -   **Location**: The automated tests for this feature can be found in the `test/posts.js` file starting on line 1237 in the “Anonymous Posts” section of the tests
