@@ -1,4 +1,0 @@
-Program
- call foo  ( [ 'Sophia', 20 ] )
- call foo end  -> [ 'The person known as "Sophia" is 20 years old' ]
-Program end -> The person known as "Sophia" is 20 years old
