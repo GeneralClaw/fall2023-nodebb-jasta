@@ -23,6 +23,7 @@ feeds/recent.rss
 dump.rdb
 
 logs/
+lib/
 
 pidfile
 
